@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2Fvoids3.github.io%2F2019%2F09%2F25%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[Gathering Children]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F28%2FGathering-Children%2F</url>
+    <content type="text"><![CDATA[解题思路：最后数只会留在相邻的RL两个位置，对于每个L,用id数组记录左边离它最近的R位置，对于每个R，记录右边离它最近的L的位置;类似于以下情况：i: 1 2 3 4 5 6 7 8 9 10 11 12 —- R R L L L L R L R R L Lid[i]: 3 3 2 2 2 2 8 7 11 11 10 10 然后遍历整个字符串，t=abs(i-id[i]); L:t为奇数，最后到L位置，否则到R位置 R:t为奇数，最后到R位置，否则到L位置Code: 12345678910111213141516171819202122232425262728293031323334#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;char ch[100005];int idx,id[100005],ans[100005];int main()&#123; scanf("%s",ch+1); int n=strlen(ch+1); for(int i=1;i&lt;=n;i++)&#123; if(ch[i]=='L') id[i]=idx; else idx=i; &#125; for(int i=n;i&gt;=1;i--)&#123; if(ch[i]=='R') id[i]=idx; else idx=i; &#125; for(int i=1;i&lt;=n;i++)&#123; if(ch[i]=='L')&#123; if((i-id[i])%2==1) ans[id[i]+1]++; else ans[id[i]]++; &#125; else &#123; if((id[i]-i)%2==1) ans[id[i]-1]++; else ans[id[i]]++; &#125; &#125; for(int i=1;i&lt;=n;i++)&#123; cout&lt;&lt;ans[i]&lt;&lt;" "; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
+      </tags>
   </entry>
 </search>
