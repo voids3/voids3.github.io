@@ -1784,7 +1784,7 @@ img:hover {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #874e54;
+  background: #93ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2489,7 +2489,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .sidebar {
-  background: reba(255, 255, 255, 0.7);
+  background: #f5f7f9;
   box-shadow: none;
   float: left;
   position: static;
