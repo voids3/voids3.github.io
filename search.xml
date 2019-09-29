@@ -11,4 +11,70 @@
         <tag>模拟</tag>
       </tags>
   </entry>
+  <entry>
+    <title><![CDATA[Alyona and Spreadsheet]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F22%2FAlyona-and-Spreadsheet%2F</url>
+    <content type="text"><![CDATA[解题思路：用二维数组逐个查找会超时，用多个一维数组来表示： a[]存储每一行的值，b[]表示每一列最高能到达的行数,c[]表示每一行的数最高能到达的行数 ；具体看代码。 Code: 12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;using namespace std;const int N = 1e5+5;int a[N],b[N],c[N];//每一行的值，每一列能到达的最上行，每一行能到达的最上行 int main()&#123; int n,m,x; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=m;i++) b[i]=1;//初始化最上行为1 for(int i=1;i&lt;=n;i++)&#123; c[i]=i; for(int j=1;j&lt;=m;j++)&#123; cin&gt;&gt;x; if(x&lt;a[j]) b[j]=i;//更新每一列最高到达的行数 a[j]=x;//更新一行每列的值 if(c[i]&gt;b[j]) c[i]=b[j];//c表示最高能到达的行数，越小行数越高 &#125; &#125; int k,l,r; cin&gt;&gt;k; while(k--)&#123; cin&gt;&gt;l&gt;&gt;r; if(c[r]&lt;=l)&#123; printf("Yes\n"); &#125; else printf("No\n"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>cf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[删括号]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F19%2F%E5%88%A0%E6%8B%AC%E5%8F%B7%2F</url>
+    <content type="text"><![CDATA[原题链接：https://ac.nowcoder.com/acm/problem/21303解题思路：用dp[i][j][k]数组，i表示s1前i个字符，j表示s2的前j个字符，k=s1删去的’(‘-s1删去的’)’; 如果s1前i个字符删去k个 ‘(‘ 与s2相符，则令dp[i][j][k]==true，最终只要满足dp[len1-1][len2-1][0]==true,即为Possible Code: 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;const int N = 200;int dp[N][N][N]; int main()&#123; string ss,tt; cin&gt;&gt;ss&gt;&gt;tt; memset(dp,0,sizeof(dp)); int len1=ss.length(); int len2=tt.length(); dp[0][0][0]=1; for(int i=0;i&lt;len1;i++)&#123; for(int j=0;j&lt;len2;j++)&#123; for(int k=0;k&lt;len1/2;k++)&#123; if(dp[i][j][k])&#123; //当删除恰好为"()",且符合目标状态 if(k==0&amp;&amp;ss[i+1]==tt[j+1]) dp[i+1][j+1][k]=1; //下一字符为"(",差值k+1 if(ss[i+1]=='(') dp[i+1][j][k+1]=1; //凑够(),删去),差值k-1 else if(k) dp[i+1][j][k-1]=1; &#125; &#125; &#125; &#125; if(dp[len1-1][len2-1][0]) printf("Possible\n"); else printf("Impossible\n"); return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[HNOI2003]操作系统]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F19%2FHNOI2003-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F</url>
+    <content type="text"><![CDATA[题目链接：https://ac.nowcoder.com/acm/problem/20030解题思路：首先建立一个优先队列，队列中元素由优先级从大到小排列，如果优先级相同，则按开始时间从小到大排列 如果队列为空，则向其中添加进程，进程进行过程有以下两种情况 1.j进程可以在i进程开始之前结束，则将j进程从队列踢出并进行输出 2.j进程不能在i进程开始之前结束，则更新j进程的操作时间，然后重新入队 （如果i进程优先级小于等于j进程，由于i的开始时间小于j，故j进程仍比i进程先进行完，但还要比较j进程是否与其他进程的开始时间冲突） Code： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;queue&gt;using namespace std;const int N = 1e6+5;struct node &#123; int id,st,ct,pr; friend bool operator &lt; (node a,node b)&#123;//优先队列 if(a.pr==b.pr) return a.st&gt;b.st;//如果优先级相同，返回开始时间小的 else return a.pr&lt;b.pr;//返回优先级大的 &#125;&#125;tt[N];priority_queue&lt;node&gt;q;int main()&#123; int cnt=0; while(~scanf("%d%d%d%d",&amp;tt[cnt].id,&amp;tt[cnt].st,&amp;tt[cnt].ct,&amp;tt[cnt].pr)) cnt++; int i=0; long long now; while(i&lt;cnt)&#123; if(q.empty()) q.push(tt[i]),now=tt[i].st,i++;//队列为空，则向其中添加元素 else &#123; node bb=q.top();q.pop(); if(now+bb.ct&lt;=tt[i].st)&#123;//队顶进程能在下一个进程开始前完成 now+=bb.ct; printf("%d %lld\n",bb.id,now);// q.push(tt[i]);now=tt[i].st;i++; //直接加入不行，但不知道原因 &#125; else &#123; bb.ct=bb.ct-tt[i].st+now;//如果不能完成，则更新队顶进程的操作时间，重新入队 now=tt[i].st; q.push(bb),q.push(tt[i]); i++; &#125; &#125; &#125; while(!q.empty())&#123;//将队列中剩余元素输出 node dd=q.top(); q.pop(); now+=dd.ct; printf("%d %lld\n",dd.id,now); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>优先队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[被3整除的子序列]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F18%2F%E8%A2%AB3%E6%95%B4%E9%99%A4%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[解题思路：1.首先要明白子序列的意思：如qwwweec，（qwe,wec等都是它的子序列）; 2.一个数如果可以被3整除，那么各位数之和也可以被3整除。 3.dp[i][j]表示前i位数子序列的余数为j的个数；（m表示余数，dp[i][j]应该等于dp[i-1][j]+dp[i-1][(j+3-m)%3]的和再模mod）； 令后半部分为dp[i-1][x],所以(x+m)%3=j+3,即x=(j+3-m)%3。 Code: 1234567891011121314151617181920212223242526#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;typedef long long ll;const int mod = 1e9+7;int main()&#123; string ss; cin&gt;&gt;ss; int len = ss.length(); int dp[55][3]; memset(dp,0,sizeof(dp)); dp[0][(ss[0]-'0')%3]=1; for(int i=1;i&lt;len;i++)&#123; int m=(ss[i]-'0')%3;// dp[i][m]=(dp[i][m]+1)%mod; for(int j=0;j&lt;3;j++)&#123; dp[i][j]=(dp[i-1][j]+dp[i-1][(j+3-m)%3])%mod;//dp公式 &#125; dp[i][m]=(dp[i][m]+1)%mod;//初始化时为0，故计算时需加1 &#125; cout&lt;&lt;dp[len-1][0]%mod&lt;&lt;endl; return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode-154]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F18%2Fleetcode-154%2F</url>
+    <content type="text"><![CDATA[反转每对括号间的子串题目链接：https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/解题思路：未遇到右括号前就压栈，遇到右括号后就反转最近的左括号与右括号之间的元素，最后需要反转输出 反转括号间的元素可以用栈来操作，先出栈再入栈。 Code: 123456789101112131415161718192021222324252627282930313233class Solution &#123;public: string reverseParentheses(string s) &#123; string ss; ss=s; stack&lt;char&gt;s1; int len = ss.length(); for(int i=0;i&lt;len;i++)&#123; if(ss[i]==')')&#123; string ch=""; while(s1.top()!='(')&#123; ch+=s1.top(); s1.pop(); &#125; s1.pop(); for(int j=0;j&lt;ch.length();j++)&#123; s1.push(ch[j]); &#125; &#125; else &#123; s1.push(ss[i]); &#125; &#125; string tt=""; while(!s1.empty())&#123; tt+=s1.top(); s1.pop(); &#125; reverse(tt.begin(),tt.end()); return tt; &#125;&#125;; K次串联后最大子数组之和 题目链接：https://leetcode-cn.com/problems/k-concatenation-maximum-sum/ 解题思路：lmax表示单个数组的最大前缀和，rmax表示单个数组的最大后缀和，maxx表示单个数组最大连续和,sum表示单个数组总和 1.如果n==1;返回maxx即可 2.如果n&gt;1;如果sum&gt;=0;比较maxx与sum*(k-2)+lmax+rmax. 如果sum&lt;0;比较maxx与lmax+rmax. Code: 123456789101112131415161718192021222324252627282930313233343536class Solution &#123;public: int kConcatenationMaxSum(vector&lt;int&gt;&amp; arr, int k) &#123; typedef long long ll; long long mod=1e9+7; ll lmax=0,rmax=0; ll cur=0; int n=arr.size(); for(int i=0;i&lt;n;i++)&#123; cur+=arr[i]; lmax=max(lmax,cur); &#125; cur=0; for(int i=n-1;i&gt;=0;i--)&#123; cur+=arr[i]; rmax=max(rmax,cur); &#125; //最大连续和 ll maxx=0,sum=0; cur=0; for(int i=0;i&lt;n;i++)&#123; sum+=arr[i]; cur+=arr[i]; if(cur&lt;0) cur=0; maxx=max(maxx,cur); &#125; if(k==1) return maxx%mod; else&#123; //sum&gt;=0 maxx=max(maxx,lmax+rmax+(k-2)*sum); //sum&lt;0 maxx=max(maxx,lmax+rmax); return maxx%mod; &#125; &#125;&#125;;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Minimum Sum LCM]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F09%2F14%2FMinimum-Sum-LCM%2F</url>
+    <content type="text"><![CDATA[解题思路：首先需要知道分解质因数的知识，其次需要注意到两个点。 1.如果n为质数或为1，因为求lcm最少需要两个数，所以结果应为n+1. 2.如果一个数有多个相同的质因子，应将他们相乘后再相加，如4，8；他们的结果应为质因子相乘后再加1. Code： 1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;cmath&gt;#include&lt;map&gt;using namespace std;typedef long long ll; int main()&#123; ll n,k=1; while(~scanf("%lld",&amp;n)&amp;&amp;n)&#123; ll ans=0; vector&lt;ll&gt;ve; map&lt;ll,ll&gt;ma; for(ll i=2;i*i&lt;=n;i++)&#123; if(n%i==0)&#123; ve.push_back(i); &#125; while(n%i==0)&#123; ma[i]++; n/=i; &#125; &#125; if(!ve.size())&#123;//ve.size()==0,说明n为质数 ans=n+1; &#125; else &#123; if(ve.size()==1 || n!=1)//如果ve.size()==1,说明只有一个相同的质因子，此时n==1,应加上n ans += n;//如果n!=1且ve.size()&gt;1,此时n&gt;1，根据唯一分解定理，应加上n for(ll i=0;i&lt;ve.size();i++)&#123; ans += pow(ve[i],ma[ve[i]]); &#125; &#125; printf("Case %lld: %lld\n",k++,ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>唯一分解定理</tag>
+      </tags>
+  </entry>
 </search>
