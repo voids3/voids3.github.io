@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[国庆训练4]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F10%2F06%2F%E5%9B%BD%E5%BA%86%E8%AE%AD%E7%BB%834%2F</url>
+    <content type="text"><![CDATA[F.Free Weights题目链接：https://codeforces.com/gym/101170/attachments题目大意：给你两排杠铃，每排的数量为n，即n对某一重量的杠铃，任意重量的杠铃可以不费力的推到相邻的空地方，问最少拿动多少的杠铃，可以使重量相等的杠铃排在一起。解题思路：刚开始以为上下相同也算排在一起，结果想了好久没有思路，后来看题解原来只有在一排排在一起才可以。我们可以先找到给定的杠铃中最重的一个，然后二分。其中还会使用到入栈出栈的操作。 Code： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include&lt;iostream&gt;#include&lt;stack&gt;using namespace std;typedef long long ll;const int N = 1e6+5;ll a[N],b[N],n;bool check(ll k)&#123; stack&lt;int&gt;s; for(int i=1;i&lt;=n;i++)&#123; if(a[i]&gt;k)&#123; if(s.empty()) s.push(a[i]); else if(s.top()==a[i]) s.pop(); else return false; &#125; &#125; if(!s.empty()) return false; for(int i=1;i&lt;=n;i++)&#123; if(b[i]&gt;k)&#123; if(s.empty()) s.push(b[i]); else if(s.top()==b[i]) s.pop(); else return false; &#125; &#125; if(!s.empty()) return false; return true;&#125;int main()&#123; ll maxx=0; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++)&#123; cin&gt;&gt;a[i]; maxx=max(a[i],maxx); &#125; for(int i=1;i&lt;=n;i++)&#123; cin&gt;&gt;b[i]; maxx=max(b[i],maxx); &#125; ll l=0,r=maxx,ans=0; while(l&lt;=r)&#123;// 二分 ll mid=(l+r)&gt;&gt;1; if(check(mid))&#123; ans=mid; r=mid-1; &#125; else l=mid+1; &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
+      <categories>
+        <category>国庆训练</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Hpu 国庆训练2]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F10%2F06%2FHpu-%E5%9B%BD%E5%BA%86%E8%AE%AD%E7%BB%832%2F</url>
+    <content type="text"><![CDATA[A.题目链接：http://codeforces.com/gym/101775/problem/A题目大意：给你n个人，在这n个人中找至少k个人建一个群，问最多可以建多少个群解题思路：所求为C(k,n) + C(k+1,n) +…+ C(n,n);由于n的范围是1e9,而k的范围是1e5,所以转化为2^k-C(1,n)-..-C(k-1,n);由于在求组合数中需要取模，用除法不好计算，所以用逆元来求。 Code: 12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;iostream&gt;using namespace std;typedef long long ll;const int maxn = 1e5+5;const ll mod = 1e9+7;ll inv[maxn];void init()&#123;//逆元打表 inv[1]=1; for(int i=2;i&lt;maxn;i++)&#123; inv[i]=(mod-(mod/i))*inv[mod%i]%mod; &#125;&#125;ll ksm(ll a,ll b)&#123; ll res=1; while(b)&#123; if(b&amp;1) res=res*a%mod; a=a*a%mod; b&gt;&gt;=1; &#125; return res;&#125;int main()&#123; ll t,n,k; cin&gt;&gt;t; init(); for(int mm=1;mm&lt;=t;mm++)&#123; cin&gt;&gt;n&gt;&gt;k; ll sum=ksm(2,n)-1; ll t=n,ans=0; for(int i=1;i&lt;k;)&#123; ans=(ans+t)%mod; t=(t*(n-i)%mod*inv[++i])%mod; &#125; ans=(sum-ans+mod)%mod; printf("Case #%d: %lld\n",mm,ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>国庆训练</category>
+      </categories>
+      <tags>
+        <tag>逆元</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Gathering Children]]></title>
     <url>%2Fvoids3.github.io%2F2019%2F09%2F28%2FGathering-Children%2F</url>
     <content type="text"><![CDATA[解题思路：最后数只会留在相邻的RL两个位置，对于每个L,用id数组记录左边离它最近的R位置，对于每个R，记录右边离它最近的L的位置;类似于以下情况：i: 1 2 3 4 5 6 7 8 9 10 11 12 —- R R L L L L R L R R L Lid[i]: 3 3 2 2 2 2 8 7 11 11 10 10 然后遍历整个字符串，t=abs(i-id[i]); L:t为奇数，最后到L位置，否则到R位置 R:t为奇数，最后到R位置，否则到L位置Code: 12345678910111213141516171819202122232425262728293031323334#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;char ch[100005];int idx,id[100005],ans[100005];int main()&#123; scanf("%s",ch+1); int n=strlen(ch+1); for(int i=1;i&lt;=n;i++)&#123; if(ch[i]=='L') id[i]=idx; else idx=i; &#125; for(int i=n;i&gt;=1;i--)&#123; if(ch[i]=='R') id[i]=idx; else idx=i; &#125; for(int i=1;i&lt;=n;i++)&#123; if(ch[i]=='L')&#123; if((i-id[i])%2==1) ans[id[i]+1]++; else ans[id[i]]++; &#125; else &#123; if((id[i]-i)%2==1) ans[id[i]-1]++; else ans[id[i]]++; &#125; &#125; for(int i=1;i&lt;=n;i++)&#123; cout&lt;&lt;ans[i]&lt;&lt;" "; &#125; return 0;&#125;]]></content>
