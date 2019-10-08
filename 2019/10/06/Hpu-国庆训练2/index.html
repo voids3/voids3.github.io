@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="惊鸿">
 <meta property="og:description" content="A.Chat Group题目链接：http://codeforces.com/gym/101775/problem/A题目大意：给你n个人，在这n个人中找至少k个人建一个群，问最多可以建多少个群解题思路：所求为C(k,n) + C(k+1,n) +…+ C(n,n);由于n的范围是1e9,而k的范围是1e5,所以转化为2^k-C(1,n)-..-C(k-1,n);由于在求组合数中需要取模，用除法不">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-08T10:27:02.718Z">
+<meta property="og:updated_time" content="2019-10-08T10:27:55.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hpu 国庆训练2">
 <meta name="twitter:description" content="A.Chat Group题目链接：http://codeforces.com/gym/101775/problem/A题目大意：给你n个人，在这n个人中找至少k个人建一个群，问最多可以建多少个群解题思路：所求为C(k,n) + C(k+1,n) +…+ C(n,n);由于n的范围是1e9,而k的范围是1e5,所以转化为2^k-C(1,n)-..-C(k-1,n);由于在求组合数中需要取模，用除法不">
@@ -296,7 +296,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 18:27:02" itemprop="dateModified" datetime="2019-10-08T18:27:02+08:00">2019-10-08</time>
+                <time title="修改时间：2019-10-08 18:27:55" itemprop="dateModified" datetime="2019-10-08T18:27:55+08:00">2019-10-08</time>
               </span>
             
           
@@ -356,10 +356,7 @@
 
 <p>L.SOS</p>
 <p>题目大意：给你一张1*N的棋盘，两个人下棋，谁先得到连续的SOS标志谁就胜利。Panda先生先手。</p>
-<p>解题思路：1.S_ <em>S是必胜局面，谁先营造出这样的局面且在这外面还有偶数个空位置。对于先手，当 N=7 时，先手先在4位置下一个S，则不管后手怎么下，先手都能创造出S</em> _S的局面。然后观察7以后的奇数都可以创造出这样的局面，所以大于7的奇数都是先手赢。</p>
-<ol start="2">
-<li>那什么时候后手能赢呢，想一想先手赢得条件，我们可以想到剩余7个连续空位置给后手操作时会营造对后手有利的局面，但考虑到先手要先放，所以可以想到–8 ，但什么时候不管怎样先手怎么下，都会给后手留下8个连续空格子呢，我们推一下就可以得到16，15的话是不满足的。由此可以得出当n&gt;=16,且为偶数时，后手赢。其余情况平局。</li>
-</ol>
+<p>解题思路：1.S_ <em>S是必胜局面，谁先营造出这样的局面且在这外面还有偶数个空位置。对于先手，当 N=7 时，先手先在4位置下一个S，则不管后手怎么下，先手都能创造出S</em> _S的局面。然后观察7以后的奇数都可以创造出这样的局面，所以大于7的奇数都是先手赢。<br>    2. 那什么时候后手能赢呢，想一想先手赢得条件，我们可以想到剩余7个连续空位置给后手操作时会营造对后手有利的局面，但考虑到先手要先放，所以可以想到–8 ，但什么时候不管怎样先手怎么下，都会给后手留下8个连续空格子呢，我们推一下就可以得到16，15的话是不满足的。由此可以得出当n&gt;=16,且为偶数时，后手赢。其余情况平局。</p>
 <p>Code:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t,n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">		<span class="keyword">if</span>(n&gt;=<span class="number">7</span>&amp;&amp;n%<span class="number">2</span>==<span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"Case #%d: Panda\n"</span>,i);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(n&gt;=<span class="number">16</span>&amp;&amp;n%<span class="number">2</span>==<span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"Case #%d: Sheep\n"</span>,i);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Case #%d: Draw\n"</span>,i);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
