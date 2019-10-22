@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/voids3.github.io/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/voids3.github.io/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/voids3.github.io/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/voids3.github.io/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/voids3.github.io/atom.xml" title="惊鸿" type="application/atom+xml">
+
+<link rel="stylesheet" href="/voids3.github.io/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/voids3.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/voids3.github.io/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="题目链接：https://codeforces.com/contest/1234/problem/D题目大意：给你一段字符串.操作1 ：将字符串x位置的字符改为字符z；操作2 : 在x,y范围内找到不同字符的个数。用到了线段树的知识，不知道的可以去b站看up主“正月点灯笼”的相关讲解。详见代码Code:">
+<meta name="keywords" content="线段树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round #590 D. Distinct Characters Queries">
+<meta property="og:url" content="http://voids3.github.io/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/index.html">
+<meta property="og:site_name" content="惊鸿">
+<meta property="og:description" content="题目链接：https://codeforces.com/contest/1234/problem/D题目大意：给你一段字符串.操作1 ：将字符串x位置的字符改为字符z；操作2 : 在x,y范围内找到不同字符的个数。用到了线段树的知识，不知道的可以去b站看up主“正月点灯笼”的相关讲解。详见代码Code:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T13:43:33.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codeforces Round #590 D. Distinct Characters Queries">
+<meta name="twitter:description" content="题目链接：https://codeforces.com/contest/1234/problem/D题目大意：给你一段字符串.操作1 ：将字符串x位置的字符改为字符z；操作2 : 在x,y范围内找到不同字符的个数。用到了线段树的知识，不知道的可以去b站看up主“正月点灯笼”的相关讲解。详见代码Code:">
+  <link rel="canonical" href="http://voids3.github.io/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Codeforces Round #590 D. Distinct Characters Queries | 惊鸿</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/voids3.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">惊鸿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/voids3.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/voids3.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/voids3.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/voids3.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/voids3.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="voids">
+      <meta itemprop="description" content="岁月漫长，值得等待">
+      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惊鸿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Codeforces Round #590 D. Distinct Characters Queries
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-22 21:20:13 / 修改时间：21:43:33" itemprop="dateCreated datePublished" datetime="2019-10-22T21:20:13+08:00">2019-10-22</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/voids3.github.io/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>题目链接：<a href="https://codeforces.com/contest/1234/problem/D" target="_blank" rel="noopener">https://codeforces.com/contest/1234/problem/D</a></p><p>题目大意：给你一段字符串.</p><p>操作1 ：将字符串x位置的字符改为字符z；</p><p>操作2 : 在x,y范围内找到不同字符的个数。</p><p>用到了线段树的知识，不知道的可以去b站看up主“正月点灯笼”的相关讲解。</p><p>详见代码</p><p>Code:</p><a id="more"></a>
+
+
+
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> tree[N*<span class="number">4</span>],t,n,x,y;<span class="comment">//线段树要开四倍数组大小 </span></span><br><span class="line"><span class="keyword">char</span> z;</span><br><span class="line"><span class="keyword">string</span> ss;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> build_tree(<span class="keyword">int</span> node,<span class="keyword">int</span> start,<span class="keyword">int</span> <span class="built_in">end</span>)&#123; <span class="comment">//建树 </span></span><br><span class="line">	<span class="built_in">if</span>(start==<span class="built_in">end</span>)&#123;</span><br><span class="line">		tree[node] = <span class="number">1</span>&lt;&lt;(ss[start]-<span class="string">'a'</span>);<span class="comment">//将每个点的字母通过数然后用二进制表示</span></span><br><span class="line">		<span class="comment">//如果ss[start]-'a'==0,左移一位后变为1</span></span><br><span class="line">		<span class="comment">//                   1               10</span></span><br><span class="line">		<span class="comment">//                   2-&gt;10           100</span></span><br><span class="line">		<span class="comment">//以此类推，每个数都可以表示为一个所有位只有一个1的二进制数</span></span><br><span class="line">		<span class="comment">//然后通过或运算得出来的数位上有几个1，就代表有几个不同的数，可以自己模拟一下 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">else</span> &#123;</span><br><span class="line">		<span class="keyword">int</span> left_node=node*<span class="number">2</span>+<span class="number">1</span>; <span class="comment">//通过模拟，可以知道该节点的左子节点的位置 </span></span><br><span class="line">		<span class="keyword">int</span> right_node=node*<span class="number">2</span>+<span class="number">2</span>;<span class="comment">//同理 </span></span><br><span class="line">		<span class="keyword">int</span> mid = start+<span class="built_in">end</span>&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build_tree(left_node,start,mid);<span class="comment">//递归 </span></span><br><span class="line">		build_tree(right_node,mid+<span class="number">1</span>,<span class="built_in">end</span>);</span><br><span class="line">		tree[node]=tree[left_node] | tree[right_node]; <span class="comment">//父节点的数等于左右子节点的或运算后的值 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> update_tree(<span class="keyword">int</span> node,<span class="keyword">int</span> start,<span class="keyword">int</span> <span class="built_in">end</span>,<span class="keyword">int</span> idx,<span class="keyword">int</span> val)&#123;<span class="comment">//对节点更新 </span></span><br><span class="line">	<span class="built_in">if</span>(start==<span class="built_in">end</span>)&#123;</span><br><span class="line">		tree[node]=val;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">else</span> &#123;</span><br><span class="line">		<span class="keyword">int</span> left_node = <span class="number">2</span>*node+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> right_node = <span class="number">2</span>*node+<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">int</span> mid = (start+<span class="built_in">end</span>)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">if</span>(idx&lt;=mid)&#123;</span><br><span class="line">			update_tree(left_node,start,mid,idx,val);</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="built_in">else</span>&#123;</span><br><span class="line">			update_tree(right_node,mid+<span class="number">1</span>,<span class="built_in">end</span>,idx,val);</span><br><span class="line">		&#125; </span><br><span class="line">		tree[node]=tree[left_node] | tree[right_node];</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> query_tree(<span class="keyword">int</span> node,<span class="keyword">int</span> start,<span class="keyword">int</span> <span class="built_in">end</span>,<span class="keyword">int</span> L,<span class="keyword">int</span> R)&#123;</span><br><span class="line">	<span class="built_in">if</span>(L&gt;<span class="built_in">end</span>||R&lt;start) <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">else</span> <span class="built_in">if</span>(L&lt;=start&amp;&amp;R&gt;=<span class="built_in">end</span>)&#123;</span><br><span class="line">		<span class="built_in">return</span> tree[node];</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">else</span> &#123;</span><br><span class="line">		<span class="keyword">int</span> left_node=node*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> right_node=node*<span class="number">2</span>+<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">int</span> mid=start+<span class="built_in">end</span>&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">		res |= query_tree(left_node,start,mid,L,R);</span><br><span class="line">		res |= query_tree(right_node,mid+<span class="number">1</span>,<span class="built_in">end</span>,L,R);</span><br><span class="line">		<span class="built_in">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line">	cin&gt;&gt;ss;</span><br><span class="line">	<span class="keyword">int</span> len=ss.length();</span><br><span class="line">	build_tree(<span class="number">0</span>,<span class="number">0</span>,len<span class="number">-1</span>);</span><br><span class="line"><span class="comment">//	for(int i=0;i&lt;13;i++)&#123;</span></span><br><span class="line"><span class="comment">//		cout&lt;&lt;tree[i]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="built_in">while</span>(t--)&#123;</span><br><span class="line">		<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="built_in">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;z;</span><br><span class="line">			update_tree(<span class="number">0</span>,<span class="number">0</span>,len<span class="number">-1</span>,x<span class="number">-1</span>,<span class="number">1</span>&lt;&lt;(z-<span class="string">'a'</span>)); <span class="comment">//我是从0节点开始建树，所以更新的节点应减一 </span></span><br><span class="line"><span class="comment">//			for(int i=0;i&lt;13;i++)&#123;</span></span><br><span class="line"><span class="comment">//				cout&lt;&lt;tree[i]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">//			&#125;</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">else</span> &#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			<span class="keyword">int</span> res=query_tree(<span class="number">0</span>,<span class="number">0</span>,len<span class="number">-1</span>,x<span class="number">-1</span>,y<span class="number">-1</span>);<span class="comment">//同上 </span></span><br><span class="line"><span class="comment">//			cout&lt;&lt;"**********\n";</span></span><br><span class="line">			<span class="built_in">while</span>(res)&#123;</span><br><span class="line">				<span class="built_in">if</span>(res&amp;<span class="number">1</span>)&#123;<span class="comment">//计算res表示的二进制数位上有几个1 </span></span><br><span class="line">					ans++;</span><br><span class="line">				&#125;</span><br><span class="line">				res&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout&lt;&lt;ans&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/voids3.github.io/tags/线段树/" rel="tag"># 线段树</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/voids3.github.io/2019/10/15/食物链/" rel="next" title="食物链">
+                  <i class="fa fa-chevron-left"></i> 食物链
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/voids3.github.io/images/avatar1.png"
+      alt="voids">
+  <p class="site-author-name" itemprop="name">voids</p>
+  <div class="site-description" itemprop="description">岁月漫长，值得等待</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/voids3.github.io/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/voids3.github.io/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/voids3.github.io/tags/">
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/voids3.github.io/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/voids3" title="GitHub &rarr; https://github.com/voids3" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:2331092495@qq.com" title="E-Mail &rarr; mailto:2331092495@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">voids</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  //<span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+-->
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+|<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.6k字</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="true"></script>
+  <script src="/voids3.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/voids3.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/voids3.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/voids3.github.io/js/utils.js?v=7.4.0"></script><script src="/voids3.github.io/js/motion.js?v=7.4.0"></script>
+<script src="/voids3.github.io/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/voids3.github.io/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/voids3.github.io/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'jqcNhOwPLWBjT7C4MjJnPY6w-gzGzoHsz',
+    appKey: '37aM9U3AfRyXir6V0jnDYErC',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/voids3.github.io/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
