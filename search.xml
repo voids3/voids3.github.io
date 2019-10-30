@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[回文子序列计数]]></title>
+    <url>%2Fvoids3.github.io%2F2019%2F10%2F30%2F%E5%9B%9E%E6%96%87%E5%AD%90%E5%BA%8F%E5%88%97%E8%AE%A1%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目链接：https://ac.nowcoder.com/acm/problem/21587题目大意：给你一段字符串，统计每个字符作为回文中心的次数，然后按题意所给方式计算最后结果解题思路：难点在于怎样统计每个字符作为回文中心的次数。首先我们想到的是计算每个字符左右两边匹配字符的对数，从而求出结果。但这样遍历的话，应该会超时。 我们先假设某一个字符为中心字符，从右边往这个中心字符遍历，建立一个数组表示中心字符左右两边匹配字符的对数，每多出一对，就在该位置上增加多出来的种类数详见代码。 Code: 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;typedef long long ll;const int N = 3005;const ll mod = 1000000007;char s[N];ll x[N],y[N],dp[N];int main()&#123; memset(dp,0,sizeof(dp)); cin&gt;&gt;s+1; int len = strlen(s+1); s[0]='0'; for(int i=1;i&lt;=len;i++)&#123; x[i]=1; int cnt=0,sum=0; for(int j=len;j&gt;i;j--)&#123; cnt=dp[j]; //左右两边有n对相等的字符对应的删除种类数: //0 1 //1 1+1 //2 1+1+2 //3 1+1+2+3 if(s[i-1]==s[j])&#123; dp[j]=(dp[j]+sum+1)%mod;//dp[j]表示多出一对匹配的字符增加的种类数 &#125; sum=(sum+cnt)%mod;//sum则表示在该轮匹配中上一个字符dp[j]的个数 x[i]=(x[i]+dp[j])%mod;//每个字母是回文中心的个数 &#125; &#125; ll ans=x[1]*1; for(int i=2;i&lt;=len;i++)&#123; ans=ans^(x[i]*i)%mod;//异或的计算方法 &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Anna, Svyatoslav and Maps]]></title>
     <url>%2Fvoids3.github.io%2F2019%2F10%2F28%2FAnna-Svyatoslav-and-Maps%2F</url>
     <content type="text"><![CDATA[题目链接：https://codeforces.com/problemset/problem/1204/C 题目大意：给你一个长度为m的p串，找到p的一个字串按照该子序列进行最短路径移动时可以经过完整的p串。 Code: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;bits/stdc++.h&gt;using namespace std;const int N = 105;const int NN = 1e6+5; const int inf = 0x3f3f3f3f;int d[N][N],n,m;int a[NN],p[NN];void floyd()&#123;//最短路 for(int k=1;k&lt;=n;k++)&#123; for(int i=1;i&lt;=n;i++)&#123; for(int j=1;j&lt;=n;j++)&#123; d[i][j]=min(d[i][j],d[i][k]+d[k][j]); &#125; &#125; &#125;&#125;int main()&#123; scanf("%d",&amp;n); getchar(); for(int i=1;i&lt;=n;i++)&#123; for(int j=1;j&lt;=n;j++)&#123; char ch=getchar(); d[i][j]=(ch=='1'?1:inf); if(i==j) d[i][j]=0;//这点很重要 &#125; getchar(); &#125; cin&gt;&gt;m; for(int i=1;i&lt;=m;i++)&#123; cin&gt;&gt;p[i]; &#125; floyd(); int cnt=0,dis=0;//表示当前点到答案点的距离 a[++cnt]=p[1]; for(int i=2;i&lt;=m;i++)&#123; dis+=(d[p[i-1]][p[i]]);// cout&lt;&lt;dis&lt;&lt;" "&lt;&lt;d[a[cnt]][p[i]]&lt;&lt;endl; if(dis&gt;d[a[cnt]][p[i]])&#123;//如果距离大于记录点到该点的距离，则将上一个点记录 a[++cnt]=p[i-1]; dis=d[a[cnt]][p[i]];//更新距离 &#125; &#125; a[++cnt]=p[m];//将最后一个点加入记录 cout&lt;&lt;cnt&lt;&lt;"\n"; for(int i=1;i&lt;=cnt;i++)&#123; cout&lt;&lt;a[i]&lt;&lt;" "; &#125; cout&lt;&lt;endl; return 0;&#125;]]></content>
