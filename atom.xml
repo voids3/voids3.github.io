@@ -6,7 +6,7 @@
   <link href="/voids3.github.io/atom.xml" rel="self"/>
   
   <link href="http://voids3.github.io/voids3.github.io/"/>
-  <updated>2019-10-30T12:56:56.626Z</updated>
+  <updated>2019-11-05T09:58:02.222Z</updated>
   <id>http://voids3.github.io/voids3.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HPU 上海选拔赛</title>
+    <link href="http://voids3.github.io/voids3.github.io/2019/11/05/HPU-%E4%B8%8A%E6%B5%B7%E9%80%89%E6%8B%94%E8%B5%9B/"/>
+    <id>http://voids3.github.io/voids3.github.io/2019/11/05/HPU-上海选拔赛/</id>
+    <published>2019-11-05T09:49:29.000Z</published>
+    <updated>2019-11-05T09:58:02.222Z</updated>
+    
+    <content type="html"><![CDATA[<p>A - Berstagram</p><p>题目链接：<a href="http://codeforces.com/problemset/problem/1250/A" target="_blank" rel="noopener">http://codeforces.com/problemset/problem/1250/A</a></p><p>题目大意: 给你一个数从1到n的数组，然后依次给你m个数，到哪个数那个数会向前移动一位，问数组里的每个数到达最左边的位置与最右边的位置是多少</p><p>解题思路：建立两个一维数组，一个保存每个数的当前位置，一个保存当前位置的数，然后再建立两个二维数组，一个保存每个数到达的最左边位置，一个保存到达的最右边位置</p><a id="more"></a><p>Code: </p><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">const int <span class="symbol">N</span> = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line">int s[<span class="symbol">N</span>],mp[<span class="symbol">N</span>];</span><br><span class="line">int num[<span class="symbol">N</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">int n,m;</span><br><span class="line">cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">for(int i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">s[i]=mp[i]=i;//s数组保存每个数的当前位置，mp数组保存每个位置的数</span><br><span class="line">num[i][<span class="number">0</span>]=num[i][<span class="number">1</span>]=i;//<span class="number">0</span>表示这个数到达的最左边位置，<span class="number">1</span>表示这个数到达的最右边位置 </span><br><span class="line">&#125;</span><br><span class="line">int x,y;</span><br><span class="line">for(int i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">cin&gt;&gt;x;</span><br><span class="line">//cout&lt;&lt;s[x]&lt;&lt;endl;</span><br><span class="line">if(s[x]&gt;<span class="number">1</span>)&#123;</span><br><span class="line">y=mp[s[x]<span class="number">-1</span>];</span><br><span class="line">num[x][<span class="number">0</span>]=min(num[x][<span class="number">0</span>],s[x]<span class="number">-1</span>);</span><br><span class="line">num[y][<span class="number">1</span>]=max(num[y][<span class="number">1</span>],s[x]);</span><br><span class="line">int tmp=mp[s[x]];//更新每个位置的数</span><br><span class="line">mp[s[x]]=mp[s[x]<span class="number">-1</span>];</span><br><span class="line">mp[s[x]<span class="number">-1</span>]=tmp;</span><br><span class="line">s[x]--;//更新每个数的当前位置</span><br><span class="line">s[y]++;</span><br><span class="line">&#125;</span><br><span class="line">//for(int i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">//cout&lt;&lt;mp[i];</span><br><span class="line">//&#125;</span><br><span class="line">//cout&lt;&lt;endl;</span><br><span class="line">&#125; </span><br><span class="line">for(int i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">cout&lt;&lt;num[i][<span class="number">0</span>]&lt;&lt;<span class="string">" "</span>&lt;&lt;num[i][<span class="number">1</span>]&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;A - Berstagram&lt;/p&gt;&lt;p&gt;题目链接：&lt;a href=&quot;http://codeforces.com/problemset/problem/1250/A&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://codeforces.com/problemset/problem/1250/A&lt;/a&gt;&lt;/p&gt;&lt;p&gt;题目大意: 给你一个数从1到n的数组，然后依次给你m个数，到哪个数那个数会向前移动一位，问数组里的每个数到达最左边的位置与最右边的位置是多少&lt;/p&gt;&lt;p&gt;解题思路：建立两个一维数组，一个保存每个数的当前位置，一个保存当前位置的数，然后再建立两个二维数组，一个保存每个数到达的最左边位置，一个保存到达的最右边位置&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="训练" scheme="http://voids3.github.io/voids3.github.io/categories/%E8%AE%AD%E7%BB%83/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>回文子序列计数</title>
