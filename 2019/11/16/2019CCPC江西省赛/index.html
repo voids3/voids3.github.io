@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/voids3.github.io/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/voids3.github.io/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/voids3.github.io/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/voids3.github.io/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/voids3.github.io/atom.xml" title="惊鸿" type="application/atom+xml">
+
+<link rel="stylesheet" href="/voids3.github.io/css/main.css?v=7.4.0">
+
+<link rel="stylesheet" href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/voids3.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/voids3.github.io/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="A-Cotree题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=6567题目大意：有两棵树，在两个树间连一条边，求两两节点之间的距离和解题思路：两棵树分别称为a,b树，在a,b上分别找一点连接，其实就是找a,b树的重心。可以先分别求出a,b树内部点距离的和，再找到重心，然后再通过重心求a树上的点到b树上的点的距离和。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019CCPC江西省赛">
+<meta property="og:url" content="http://voids3.github.io/voids3.github.io/2019/11/16/2019CCPC江西省赛/index.html">
+<meta property="og:site_name" content="惊鸿">
+<meta property="og:description" content="A-Cotree题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=6567题目大意：有两棵树，在两个树间连一条边，求两两节点之间的距离和解题思路：两棵树分别称为a,b树，在a,b上分别找一点连接，其实就是找a,b树的重心。可以先分别求出a,b树内部点距离的和，再找到重心，然后再通过重心求a树上的点到b树上的点的距离和。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-16T08:12:42.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019CCPC江西省赛">
+<meta name="twitter:description" content="A-Cotree题目链接：http://acm.hdu.edu.cn/showproblem.php?pid=6567题目大意：有两棵树，在两个树间连一条边，求两两节点之间的距离和解题思路：两棵树分别称为a,b树，在a,b上分别找一点连接，其实就是找a,b树的重心。可以先分别求出a,b树内部点距离的和，再找到重心，然后再通过重心求a树上的点到b树上的点的距离和。">
+  <link rel="canonical" href="http://voids3.github.io/voids3.github.io/2019/11/16/2019CCPC江西省赛/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>2019CCPC江西省赛 | 惊鸿</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/voids3.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">惊鸿</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/voids3.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/voids3.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/voids3.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/voids3.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/voids3.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/11/16/2019CCPC江西省赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="voids">
+      <meta itemprop="description" content="岁月漫长，值得等待">
+      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惊鸿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">2019CCPC江西省赛
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-16 16:12:11 / 修改时间：16:12:42" itemprop="dateCreated datePublished" datetime="2019-11-16T16:12:11+08:00">2019-11-16</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/voids3.github.io/2019/11/16/2019CCPC江西省赛/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2019/11/16/2019CCPC江西省赛/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="A-Cotree"><a href="#A-Cotree" class="headerlink" title="A-Cotree"></a>A-Cotree</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6567" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6567</a></p><p>题目大意：有两棵树，在两个树间连一条边，求两两节点之间的距离和</p><p>解题思路：两棵树分别称为a,b树，在a,b上分别找一点连接，其实就是找a,b树的重心。<br>可以先分别求出a,b树内部点距离的和，再找到重心，然后再通过重心求a树上的点到b树上的点的距离和。</p><a id="more"></a>
+
+
+<p>推荐题解：<a href="https://blog.csdn.net/lalala445566/article/details/97004819" target="_blank" rel="noopener">https://blog.csdn.net/lalala445566/article/details/97004819</a></p>
+<p>Code:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e6</span>+<span class="number">5</span>;</span><br><span class="line">ll h[N],vis[N],cnt;</span><br><span class="line">ll sum[N],sum_num[N];<span class="comment">//以该节点为根的树的所有节点到该节点距离的和，，以该节点为根的树的所有子节点 </span></span><br><span class="line">ll root_1,root_2,sum_root1,sum_root2;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	ll to,nxt,w;</span><br><span class="line">&#125;eg[N*<span class="number">2</span>]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll u,ll v)</span></span>&#123;<span class="comment">//链式前向星建图 </span></span><br><span class="line">	eg[cnt].w=<span class="number">1</span>;eg[cnt].to=v;eg[cnt].nxt=h[u];h[u]=cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(ll x)</span></span>&#123;<span class="comment">//找到以每个节点为根节点的树的sum值和sum_num值 </span></span><br><span class="line">	ll num=<span class="number">0</span>;</span><br><span class="line">	ll num_num=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=h[x];i!=<span class="number">-1</span>;i=eg[i].nxt)&#123;</span><br><span class="line">		ll v = eg[i].to;</span><br><span class="line">		<span class="keyword">if</span>(!vis[v])&#123;</span><br><span class="line">			vis[v]=<span class="number">1</span>;</span><br><span class="line">			dfs(v);</span><br><span class="line">			num+=sum_num[v]+sum[v]+<span class="number">1</span>;</span><br><span class="line">			num_num+=sum_num[v]+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sum[x]=num;</span><br><span class="line">	sum_num[x]=num_num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">find_root</span><span class="params">(ll now,ll &amp;root,ll &amp;sum_root)</span></span>&#123;<span class="comment">//now为当前节点，root一直更新为当前最有可能是重心的节点，sum_root所有点到root距离的和 </span></span><br><span class="line">	ll tot=<span class="number">0</span>;</span><br><span class="line">	tot+=sum[now];<span class="comment">//将以所有节点为根的sum值累加 </span></span><br><span class="line">	ll temp=sum[now];<span class="comment">//记忆当前节点的sum值和sum_num值，以便恢复现场 </span></span><br><span class="line">	ll temp_root=sum_num[now];</span><br><span class="line">	<span class="keyword">for</span>(ll i=h[now];i!=<span class="number">-1</span>;i=eg[i].nxt)&#123;<span class="comment">//链式前向星遍历图 </span></span><br><span class="line">		ll v=eg[i].to;</span><br><span class="line">		<span class="keyword">if</span>(!vis[v])&#123;</span><br><span class="line">			vis[v]=<span class="number">1</span>;</span><br><span class="line">			<span class="comment">//****更新数组，以v为重心是否比以root为重心距离更小 </span></span><br><span class="line">			sum[now]-=(sum_num[v]+sum[v]+<span class="number">1</span>); </span><br><span class="line">			sum_num[now]-=(sum_num[v]+<span class="number">1</span>);</span><br><span class="line">			sum[v]+=(sum[now]+sum_num[now]+<span class="number">1</span>);</span><br><span class="line">			sum_num[v]+=(sum_num[now]+<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span>(sum[v]&lt;sum_root)&#123;<span class="comment">//如果满足条件，则更新重心及所有节点到重心的距离 </span></span><br><span class="line">				sum_root=sum[v];</span><br><span class="line">				root=v;</span><br><span class="line">			&#125; </span><br><span class="line">			tot+=find_root(v,root,sum_root);</span><br><span class="line">			sum[now]=temp;<span class="comment">//恢复现场 </span></span><br><span class="line">			sum_num[now]=temp_root;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(h,<span class="number">-1</span>,<span class="keyword">sizeof</span>(h));</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">	cnt=<span class="number">0</span>;</span><br><span class="line">	ll n,ans=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	ll u,v;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n<span class="number">-2</span>;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;u,&amp;v);</span><br><span class="line">		add(u,v);add(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	root_1=<span class="number">1</span>;</span><br><span class="line">	vis[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	dfs(<span class="number">1</span>);<span class="comment">//先找一棵树上的sum值和sum_num值 </span></span><br><span class="line"><span class="comment">//	cout&lt;&lt;"*************\n";</span></span><br><span class="line">	sum_root1=sum[root_1];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;<span class="comment">//找另外一棵树 </span></span><br><span class="line">		<span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">			vis[i]=<span class="number">1</span>;</span><br><span class="line">			root_2=i;</span><br><span class="line">			dfs(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//	cout&lt;&lt;"*************\n";</span></span><br><span class="line">	sum_root2=sum[root_2];</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));<span class="comment">//将访问记录归零 </span></span><br><span class="line">	vis[root_1]=<span class="number">1</span>;</span><br><span class="line">	ll temp=find_root(root_1,root_1,sum_root1);<span class="comment">//temp所存的值是该棵树上以所有节点为根的sum值的总和 ，即该树上所有两点距离和的两倍，不明白可以模拟一下 </span></span><br><span class="line">	ans+=temp/<span class="number">2</span>;<span class="comment">//内部距离和除以二，即为该树内部距离和 </span></span><br><span class="line">	vis[root_2]=<span class="number">1</span>; </span><br><span class="line">	temp=find_root(root_2,root_2,sum_root2);<span class="comment">//同理 </span></span><br><span class="line">	ans+=temp/<span class="number">2</span>;</span><br><span class="line">	ans+=((sum[root_1]+sum_num[root_1]+<span class="number">1</span>)*(sum_num[root_2]+<span class="number">1</span>)+sum[root_2]*(sum_num[root_1]+<span class="number">1</span>)); <span class="comment">//前半部分是所有a树所有节点到b树重心的距离和乘以b树节点总个数 </span></span><br><span class="line">																								<span class="comment">//后半部分是b树内部距离和乘以a树节点个数 </span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="D-Wave"><a href="#D-Wave" class="headerlink" title="D.Wave"></a>D.Wave</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6570" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6570</a></p>
+<p>题目大意：在字符串s中求奇数位置为i,偶数位置为j切i,j不相等的子序列最长为多少</p>
+<p>解题思路：dp[i] [j] 存的是奇数位为i偶数为为j的最长长度。对于每个a[i]，更新dp[a[i]][j]为偶数时的情况，更新dp[j][a[i]]为奇数时的情况。因为以a[i],j为循环节长度是偶数才能在后面再加一个a[i],以j，a[i]为循环节长度是奇数才能在后面再加一个a[i];</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">200</span>][<span class="number">200</span>],s[<span class="number">100010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,c;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;n,&amp;c);</span><br><span class="line">	<span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span> dp);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;s[i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=c;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==s[i]) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span>(dp[s[i]][j]%<span class="number">2</span>==<span class="number">0</span>) </span><br><span class="line">				dp[s[i]][j]++;</span><br><span class="line">			<span class="keyword">if</span>(dp[j][s[i]]&amp;<span class="number">1</span>) <span class="comment">//当时用的else if 所以遍历样例到2时,dp[1][2]就连不上了 </span></span><br><span class="line">				dp[j][s[i]]++;	</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=c;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=c;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==i) <span class="keyword">continue</span>;</span><br><span class="line">			ans=max(ans,dp[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="F-String"><a href="#F-String" class="headerlink" title="F - String"></a>F - String</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6572" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6572</a></p>
+<p>题目大意：在字符串s中随机抽四个字母，求四个字母组合是avin的概率</p>
+<p>解题思路：遍历s求字符串中a,v,i,n的个数,求出他们的乘积，再求出字符串长度的四次方，然后两者约分按格式输出即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt;ma;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;s;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		ma[s[i]]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> a=ma[<span class="string">'a'</span>],b=ma[<span class="string">'v'</span>],c=ma[<span class="string">'i'</span>],d=ma[<span class="string">'n'</span>];</span><br><span class="line">	<span class="keyword">int</span> ans,res;</span><br><span class="line">	ans=a*b*c*d;</span><br><span class="line">	res=n*n*n*n;</span><br><span class="line">	<span class="keyword">int</span> temp=__gcd(ans,res);</span><br><span class="line">	<span class="keyword">if</span>(ans==<span class="number">0</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d/%d\n"</span>,ans,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d/%d\n"</span>,ans/temp,res/temp);                                                                                                                                                                        </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="G-Traffic"><a href="#G-Traffic" class="headerlink" title="G - Traffic"></a>G - Traffic</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6573" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6573</a></p>
+<p>题目大意：有从东到西行驶的车和从南到北行驶的车要使不发生车祸，求从南到北行驶的车最短停留时间</p>
+<p>解题思路：如果要等，所有从南到北行驶的车都要等待相同的时间才能走，暴力枚举1到1000，符合条件break输出即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1050</span>],b[<span class="number">1050</span>],c[<span class="number">1050</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++) c[i]=b[i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++) c[i]+=x;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i]==c[j]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++) <span class="built_in">cin</span>&gt;&gt;b[j];</span><br><span class="line">	sort(a,a+n);</span><br><span class="line">	sort(b,b+m);</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">1000</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(check(i))&#123;</span><br><span class="line">			ans=i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="H-Rng"><a href="#H-Rng" class="headerlink" title="H - Rng"></a>H - Rng</h2><p>题目链接：u.edu.cn/showproblem.php?pid=6574</p>
+<p>题目大意，在[1,c]中，找一个整数r,再从[1,r]中找一个整数l,变为一个新范围[l,r],这样重复两次问两次范围相交的概率</p>
+<p>解题思路：打表找规律，发现规律为（n+1）/（2*n）,因为数比较大，需要用到逆元</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std<span class="comment">;</span></span><br><span class="line">typedef long long <span class="keyword">ll;</span></span><br><span class="line"><span class="keyword">const </span><span class="keyword">ll </span>mod = <span class="number">1</span>e9+<span class="number">7</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ll </span>ksm(<span class="keyword">ll </span>a,<span class="keyword">ll </span><span class="keyword">b)&#123;</span></span><br><span class="line"><span class="keyword">	</span><span class="keyword">ll </span>res=<span class="number">1</span><span class="comment">;</span></span><br><span class="line">	while(<span class="keyword">b)&#123;</span></span><br><span class="line"><span class="keyword">	</span>	if(<span class="keyword">b&amp;1) </span>res=(res*a)%mod<span class="comment">;</span></span><br><span class="line">		a=a*a%mod<span class="comment">;</span></span><br><span class="line">		<span class="keyword">b&gt;&gt;=1;</span></span><br><span class="line"><span class="keyword">	</span>&#125;</span><br><span class="line">	return res<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	<span class="keyword">ll </span>n<span class="comment">;</span></span><br><span class="line">	cin&gt;&gt;n<span class="comment">;</span></span><br><span class="line">	cout&lt;&lt;(n+<span class="number">1</span>)%mod*ksm(<span class="number">2</span>*n,mod-2)%mod&lt;&lt;<span class="string">'\n'</span><span class="comment">;</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	return <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="I-Budget"><a href="#I-Budget" class="headerlink" title="I - Budget"></a>I - Budget</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6575" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6575</a></p>
+<p>题目大意：将公司所有账目从三位小数保留成两位，问更新后差值是多少</p>
+<p>解题思路：将差额求出来输出即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">char</span> p[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">double</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,p);</span><br><span class="line">		<span class="keyword">int</span> len=<span class="built_in">strlen</span>(p);</span><br><span class="line">		<span class="keyword">int</span> temp=p[len<span class="number">-1</span>]-<span class="string">'0'</span>;</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">4</span>) &#123;</span><br><span class="line">			<span class="keyword">double</span> t=temp*<span class="number">1.0</span>/<span class="number">1000</span>;</span><br><span class="line">			ans-=t;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">double</span> t=temp*<span class="number">1.0</span>/<span class="number">1000</span>;</span><br><span class="line">			ans+=(<span class="number">0.01</span>-t);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">double</span> pp;</span><br><span class="line"><span class="comment">//	ans=4.004;</span></span><br><span class="line">	<span class="keyword">if</span>(ans&lt;<span class="number">0</span>) pp=-ans;</span><br><span class="line">	<span class="keyword">else</span> pp=ans;</span><br><span class="line">	<span class="keyword">if</span>(pp&gt;=<span class="number">0</span>&amp;&amp;pp&lt;=<span class="number">1.0</span>) <span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>,ans);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(pp&gt;<span class="number">1.0</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> num=(<span class="keyword">int</span>)(pp*<span class="number">1000</span>);</span><br><span class="line">		<span class="keyword">int</span> cnt=num%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(cnt&lt;=<span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,ans);</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(ans&lt;<span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,ans<span class="number">-0.01</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,ans+<span class="number">0.01</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="J-Worker"><a href="#J-Worker" class="headerlink" title="J - Worker"></a>J - Worker</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6576" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6576</a></p>
+<p>题目大意：有n个工厂m个工人，每个工厂产出不同，问怎样分配工人使每个工厂产出相同</p>
+<p>解题思路：找到工厂产出的最小公倍数，然后求出满足相同产出的最少工人数，然后求出总工人对最少工人数的倍数，然后求出每个工厂所需最少工人数乘以倍数即为每个工厂分配工人数，输出即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1005</span>;</span><br><span class="line">ll a[N],b[N];</span><br><span class="line">ll n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	ll ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">		ans=ans*a[i]/__gcd(ans,a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	ll sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		b[i]=ans/a[i];</span><br><span class="line">		sum+=b[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m%sum==<span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">		ll t=m/sum;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i) <span class="built_in">printf</span>(<span class="string">" %lld"</span>,b[i]*t);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%lld"</span>,b[i]*t);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="K-Class"><a href="#K-Class" class="headerlink" title="K - Class"></a>K - Class</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6577" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6577</a></p>
+<p>题目大意：x,y分别是a,b的和，差，求a*b</p>
+<p>解题思路：求出a,b；相乘即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x,y;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	a=(x+y)/<span class="number">2</span>;</span><br><span class="line">	b=x-a;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;a*b&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/voids3.github.io/2019/11/09/最短路/" rel="next" title="最短路">
+                  <i class="fa fa-chevron-left"></i> 最短路
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Cotree"><span class="nav-number">1.</span> <span class="nav-text">A-Cotree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Wave"><span class="nav-number">2.</span> <span class="nav-text">D.Wave</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-String"><span class="nav-number">3.</span> <span class="nav-text">F - String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Traffic"><span class="nav-number">4.</span> <span class="nav-text">G - Traffic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-Rng"><span class="nav-number">5.</span> <span class="nav-text">H - Rng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Budget"><span class="nav-number">6.</span> <span class="nav-text">I - Budget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-Worker"><span class="nav-number">7.</span> <span class="nav-text">J - Worker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-Class"><span class="nav-number">8.</span> <span class="nav-text">K - Class</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/voids3.github.io/images/avatar1.png"
+      alt="voids">
+  <p class="site-author-name" itemprop="name">voids</p>
+  <div class="site-description" itemprop="description">岁月漫长，值得等待</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/voids3.github.io/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/voids3.github.io/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/voids3.github.io/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/voids3.github.io/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/voids3" title="GitHub &rarr; https://github.com/voids3" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:2331092495@qq.com" title="E-Mail &rarr; mailto:2331092495@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">voids</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  //<span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+-->
+
+<span id="busuanzi_container_site_uv">
+  本站访问次数：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+</span>
+
+|<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共10.4k字</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="true"></script>
+  <script src="/voids3.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/voids3.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/voids3.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/voids3.github.io/js/utils.js?v=7.4.0"></script><script src="/voids3.github.io/js/motion.js?v=7.4.0"></script>
+<script src="/voids3.github.io/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/voids3.github.io/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/voids3.github.io/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'jqcNhOwPLWBjT7C4MjJnPY6w-gzGzoHsz',
+    appKey: '37aM9U3AfRyXir6V0jnDYErC',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+  
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/voids3.github.io/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
