@@ -254,6 +254,93 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/10/28/Anna-Svyatoslav-and-Maps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="voids">
+      <meta itemprop="description" content="岁月漫长，值得等待">
+      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惊鸿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/voids3.github.io/2019/10/28/Anna-Svyatoslav-and-Maps/" class="post-title-link" itemprop="url">Anna, Svyatoslav and Maps</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-28 21:57:10" itemprop="dateCreated datePublished" datetime="2019-10-28T21:57:10+08:00">2019-10-28</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/voids3.github.io/2019/10/28/Anna-Svyatoslav-and-Maps/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2019/10/28/Anna-Svyatoslav-and-Maps/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>题目链接：<a href="https://codeforces.com/problemset/problem/1204/C" target="_blank" rel="noopener">https://codeforces.com/problemset/problem/1204/C</a></p>
+<p>题目大意：给你一个长度为m的p串，找到p的一个字串按照该子序列进行最短路径移动时可以经过完整的p串。</p>
+<p>Code:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">105</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> NN = <span class="number">1e6</span>+<span class="number">5</span>; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> d[N][N],n,m;</span><br><span class="line"><span class="keyword">int</span> a[NN],p[NN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span>&#123;<span class="comment">//最短路 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">				d[i][j]=min(d[i][j],d[i][k]+d[k][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">char</span> ch=getchar();</span><br><span class="line">			d[i][j]=(ch==<span class="string">'1'</span>?<span class="number">1</span>:inf);</span><br><span class="line">			<span class="keyword">if</span>(i==j) d[i][j]=<span class="number">0</span>;<span class="comment">//这点很重要 </span></span><br><span class="line">		&#125;</span><br><span class="line">		getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;p[i];</span><br><span class="line">	&#125;</span><br><span class="line">	floyd();</span><br><span class="line">	<span class="keyword">int</span> cnt=<span class="number">0</span>,dis=<span class="number">0</span>;<span class="comment">//表示当前点到答案点的距离 </span></span><br><span class="line">	a[++cnt]=p[<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		dis+=(d[p[i<span class="number">-1</span>]][p[i]]);</span><br><span class="line"><span class="comment">//		cout&lt;&lt;dis&lt;&lt;" "&lt;&lt;d[a[cnt]][p[i]]&lt;&lt;endl;</span></span><br><span class="line">		<span class="keyword">if</span>(dis&gt;d[a[cnt]][p[i]])&#123;<span class="comment">//如果距离大于记录点到该点的距离，则将上一个点记录</span></span><br><span class="line">			a[++cnt]=p[i<span class="number">-1</span>];</span><br><span class="line">			dis=d[a[cnt]][p[i]];<span class="comment">//更新距离 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	a[++cnt]=p[m];<span class="comment">//将最后一个点加入记录</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;cnt&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;i++)&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;a[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/10/22/Codeforces-Round-590-D-Distinct-Characters-Queries/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1182,110 +1269,6 @@ a[]存储每一行的值，b[]表示每一列最高能到达的行数,c[]表示�
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/09/18/leetcode-154/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="voids">
-      <meta itemprop="description" content="岁月漫长，值得等待">
-      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惊鸿">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/voids3.github.io/2019/09/18/leetcode-154/" class="post-title-link" itemprop="url">leetcode-154</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-18 09:40:38" itemprop="dateCreated datePublished" datetime="2019-09-18T09:40:38+08:00">2019-09-18</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/voids3.github.io/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/voids3.github.io/2019/09/18/leetcode-154/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2019/09/18/leetcode-154/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>反转每对括号间的子串</p><p>题目链接：<a href="https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/</a></p><p>解题思路：未遇到右括号前就压栈，遇到右括号后就反转最近的左括号与右括号之间的元素，最后需要反转输出<br>        反转括号间的元素可以用栈来操作，先出栈再入栈。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/voids3.github.io/2019/09/18/leetcode-154/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1338,7 +1321,7 @@ a[]存储每一行的值，b[]表示每一列最高能到达的行数,c[]表示�
         
           <a href="/voids3.github.io/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1351,7 +1334,7 @@ a[]存储每一行的值，b[]表示每一列最高能到达的行数,c[]表示�
             <a href="/voids3.github.io/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1432,7 +1415,7 @@ a[]存储每一行的值，b[]表示每一列最高能到达的行数,c[]表示�
 
 |<div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共16.2k字</span>
+  <span class="post-count">博客全站共16.8k字</span>
 </div>
         
 <div class="busuanzi-count">
