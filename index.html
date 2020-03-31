@@ -254,6 +254,97 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2020/04/01/Codeforces-Round-630-Div-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="voids">
+      <meta itemprop="description" content="岁月漫长，值得等待">
+      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="惊鸿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/voids3.github.io/2020/04/01/Codeforces-Round-630-Div-2/" class="post-title-link" itemprop="url">Codeforces Round #630 (Div. 2)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-01 01:23:55" itemprop="dateCreated datePublished" datetime="2020-04-01T01:23:55+08:00">2020-04-01</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/voids3.github.io/2020/04/01/Codeforces-Round-630-Div-2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2020/04/01/Codeforces-Round-630-Div-2/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>题目链接：<a href="https://codeforces.com/contest/1332" target="_blank" rel="noopener">https://codeforces.com/contest/1332</a></p><h1 id="A-Exercising-Walk"><a href="#A-Exercising-Walk" class="headerlink" title="A. Exercising Walk"></a>A. Exercising Walk</h1><p>题意：在题目所给次数反复左右上下跳过程中不超过题目所给范围</p><p>Code:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> t,a,b,c,d,x,y,x1,x2,y1,y2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;x1&gt;&gt;y1&gt;&gt;x2&gt;&gt;y2;</span><br><span class="line">		<span class="keyword">if</span>(x==x1 &amp;&amp; x1==x2 &amp;&amp; (a||b))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(y==y1 &amp;&amp; y==y2 &amp;&amp; (c||d))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(a&gt;=b) a=a-b,b=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> b=b-a,a=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(c&gt;=d) c=c-d,d=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> d=d-c,c=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(x-x1&gt;=a&amp;&amp;x2-x&gt;=b&amp;&amp;y-y1&gt;=c&amp;&amp;y2-y&gt;=d) <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/voids3.github.io/2020/04/01/Codeforces-Round-630-Div-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2020/03/27/Codeforces-Round-629-Div-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1152,97 +1243,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://voids3.github.io/voids3.github.io/voids3.github.io/2019/11/16/2019CCPC江西省赛/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="voids">
-      <meta itemprop="description" content="岁月漫长，值得等待">
-      <meta itemprop="image" content="/voids3.github.io/images/avatar1.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="惊鸿">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/voids3.github.io/2019/11/16/2019CCPC江西省赛/" class="post-title-link" itemprop="url">2019CCPC江西省赛</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-16 16:12:11" itemprop="dateCreated datePublished" datetime="2019-11-16T16:12:11+08:00">2019-11-16</time>
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/voids3.github.io/2019/11/16/2019CCPC江西省赛/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/voids3.github.io/2019/11/16/2019CCPC江西省赛/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="A-Cotree"><a href="#A-Cotree" class="headerlink" title="A-Cotree"></a>A-Cotree</h2><p>题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6567" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6567</a></p><p>题目大意：有两棵树，在两个树间连一条边，求两两节点之间的距离和</p><p>解题思路：两棵树分别称为a,b树，在a,b上分别找一点连接，其实就是找a,b树的重心。<br>可以先分别求出a,b树内部点距离的和，再找到重心，然后再通过重心求a树上的点到b树上的点的距离和。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/voids3.github.io/2019/11/16/2019CCPC江西省赛/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1295,7 +1295,7 @@
         
           <a href="/voids3.github.io/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1389,7 +1389,7 @@
 
 |<div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共20.1k字</span>
+  <span class="post-count">博客全站共21k字</span>
 </div>
         
 <div class="busuanzi-count">
